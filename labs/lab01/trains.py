@@ -10,6 +10,16 @@ doc = parseString(page.content)
 # if I need to store XML
 with open("trainxml.xml","w") as xmlfp:
     doc.writexml(xmlfp)
+    
+#The names of the tags for ex.8    
+retrieveTags=['TrainStatus',
+'TrainLatitude',
+'TrainLongitude',
+'TrainCode',
+'TrainDate',
+'PublicMessage',
+'Direction'
+]
  
  # 4. Modify the program to print out each of the trainscodes.
  # I.e. find the listings and iterate through them 
@@ -47,6 +57,23 @@ with open('week03_train.csv', mode='w', newline='') as train_file:
             dataList.append(traincode)
         else:
             dataList.append("N/A")  # Placeholder for missing data
+        # write data
+        train_writer.writerow(dataList)
+        
+# 8. At the top of the program make an array called retrieveTags that will
+# store all the names of the tags we want to retrieve. 
+
+with open('week03_train_all_tags.csv', mode='w', newline='') as train_file:
+    train_writer = csv.writer(train_file, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+ 
+    objTrainPositionsNodes = doc.getElementsByTagName("objTrainPositions")
+    for objTrainPositionsNode in objTrainPositionsNodes:
+        dataList = []
+        
+        # get all data
+        for retrieveTag in retrieveTags:
+            datanode = objTrainPositionsNode.getElementsByTagName(retrieveTag).item(0)
+            dataList.append(datanode.firstChild.nodeValue.strip())
         # write data
         train_writer.writerow(dataList)
         
