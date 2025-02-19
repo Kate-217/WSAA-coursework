@@ -10,5 +10,16 @@ doc = parseString(page.content)
 # if I need to store XML
 with open("trainxml.xml","w") as xmlfp:
     doc.writexml(xmlfp)
+ 
+ # 4. Modify the program to print out each of the trainscodes.
+ # I.e. find the listings and iterate through them 
+ # to print each traincode out. Check it works 
+ 
+objTrainPositionsNodes = doc.getElementsByTagName("objTrainPositions")
+for objTrainPositionsNode in objTrainPositionsNodes:
+    traincodenode = objTrainPositionsNode.getElementsByTagName("TrainCode").item(0)
+    traincode = traincodenode.firstChild.nodeValue.strip()
+    print (traincode)
+    
     
 
