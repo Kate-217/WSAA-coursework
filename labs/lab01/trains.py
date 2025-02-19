@@ -30,7 +30,27 @@ for objTrainPositionsNode in objTrainPositionsNodes:
      TrainLatitudenodes = objTrainPositionsNode.getElementsByTagName('TrainLatitude').item(0)
      TrainLatitude = TrainLatitudenodes.firstChild.nodeValue.strip()
      print(TrainLatitude)
-    
+     
+# 6. Store this data into a CSV.
+
+with open('week03_train.csv', mode='w', newline='') as train_file:
+    train_writer = csv.writer(train_file, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+ 
+    objTrainPositionsNodes = doc.getElementsByTagName("objTrainPositions")
+    for objTrainPositionsNode in objTrainPositionsNodes:
+        dataList = []
+        
+        # get TrainCode
+        traincodenode = objTrainPositionsNode.getElementsByTagName("TrainCode").item(0)
+        if traincodenode and traincodenode.firstChild:
+            traincode = traincodenode.firstChild.nodeValue.strip()
+            dataList.append(traincode)
+        else:
+            dataList.append("N/A")  # Placeholder for missing data
+        # write data
+        train_writer.writerow(dataList)
+        
+  
     
     
 
