@@ -1,4 +1,6 @@
-# Write a program that "deals" (prints out) 5 cards
+# Author Katerina Lisovenko 
+# This program "deals" (prints out) n cards and calculates duplicates and triples in its values.
+
 
 import requests
 #import pandas as pd
@@ -35,7 +37,6 @@ counts = Counter(values)
 
 pairs = len([count for count in counts.values() if count == 2])
 triples = len([count for count in counts.values() if count == 3])
-
 
 if pairs == 1:
     print('You have a pair')
