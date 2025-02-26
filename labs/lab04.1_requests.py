@@ -46,3 +46,12 @@ def update_book(id,book):
 if __name__ == "__main__":
     update = {"author":"A.Dumas","price":88, "title":"The Vicomte de Bragelonne"}
     print(update_book(1609,update)) 
+
+def delete_book(id):
+    del_url = url + "/" + str(id)
+    response = requests.delete(del_url)
+    return response.json()
+
+if __name__ == "__main__":
+    delete_book(1610)
+    print(read_books())
