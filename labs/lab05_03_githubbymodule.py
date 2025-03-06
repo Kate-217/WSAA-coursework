@@ -11,6 +11,6 @@ g = Github(apikey)
 repo = g.get_repo("Kate-217/aprivateone")
 print(repo.clone_url)
 
-file_info = repo.get_contents("WSAA-coursework/labs/test.txt")
-url_file = file_info.download_url
-print (url_file)
+#file_info = repo.get_contents("WSAA-coursework/labs/test.txt")
+#url_file = file_info.download_url
+#print (url_file)
