@@ -8,7 +8,7 @@ doc = parseString(page.content)
 #print(doc.toprettyxml())
 
 # if I need to store XML
-with open("trainxml.xml","w") as xmlfp:
+with open("WSAA-coursework/labs/trainxml.xml","w") as xmlfp:
     doc.writexml(xmlfp)
     
 #The names of the tags for ex.8    
@@ -43,7 +43,7 @@ for objTrainPositionsNode in objTrainPositionsNodes:
      
 # 6. Store this data into a CSV.
 
-with open('week03_train.csv', mode='w', newline='') as train_file:
+with open('WSAA-coursework/labs/week03_train.csv', mode='w', newline='') as train_file:
     train_writer = csv.writer(train_file, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
  
     objTrainPositionsNodes = doc.getElementsByTagName("objTrainPositions")
@@ -63,7 +63,7 @@ with open('week03_train.csv', mode='w', newline='') as train_file:
 # 8. At the top of the program make an array called retrieveTags that will
 # store all the names of the tags we want to retrieve. 
 
-with open('week03_train_all_tags.csv', mode='w', newline='') as train_file:
+with open('WSAA-coursework/labs/week03_train_all_tags.csv', mode='w', newline='') as train_file:
     train_writer = csv.writer(train_file, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
  
     objTrainPositionsNodes = doc.getElementsByTagName("objTrainPositions")

@@ -15,7 +15,7 @@ print(response.status_code)
 
 result = response.content
 
-with open("document.pdf","wb") as handler:
+with open("WSAA-coursework/labs/document.pdf","wb") as handler:
     handler.write(result)
     
     
