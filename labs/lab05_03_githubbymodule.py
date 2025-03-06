@@ -21,5 +21,6 @@ response = requests.get(url_file)
 file_content = response.text
 print(f"This is in the file: {file_content}")
 
-
+new_content = file_content + " I have just added this line via VS Code \n"
+print (new_content)
 
