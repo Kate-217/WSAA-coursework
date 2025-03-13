@@ -171,4 +171,5 @@ cython_debug/
 .pypirc
 
 config.py
+config1.py
 
