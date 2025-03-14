@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-Shirt Shop</title>
+</head>
+<body>
+    <h1>Choose Your T-Shirt</h1>
+    
+    <form method="POST">
+        <label for="color">Select color:</label>
+        <select name="color" id="color">
+            <option value="yellow">Yellow</option>
+            <option value="blue">Blue</option>
+            <option value="red">Red</option>
+        </select>
+        <button type="submit">Get Price</button>
+    </form>
+
+    {% if selected_color %}
+        <h2>{{ selected_color.capitalize() }} T-Shirt - {{ price }} euro</h2>
+    {% endif %}
+</body>
+</html>
