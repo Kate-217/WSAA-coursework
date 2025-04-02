@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+    <title> ex 2.7. </title>
+</head>
+<body>
+    <div id = "output">
+        output here
+    </div>
+
+    <script>
+        var names = ["Joe", "Mary", "Pat"]
+        var output = "" // output is empty now
+        for (name of names) {
+            output += name+ '</br>' // to print on a new line
+        } 
+        document.getElementById("output").innerHTML=output
+    </script>
+</body>    
+
+</html>
