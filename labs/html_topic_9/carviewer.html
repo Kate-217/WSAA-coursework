@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+crossorigin="anonymous">
+    <title>View books</title>
+</head>
+<body>
+
+<h1>Books</h1>
+
+<div><button>Create </button></div>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>The best book</td>
+            <td>JK Row</td>
+            <td>10</td>
+            <td><button>Update</button></td>
+            <td><button>Delete</button></td>
+        </tr>
+    </table>        
+</div>
+<h2><span>Create a book</span></h2>
+<span style="display:none"> Update this</span>
+<div>
+    ID <input type="text" name="id"><br/>
+    Title <input type="text" name="title"><br/>
+    Author <input type="text" name="author"><br/>
+    Price <input type="text" name="price"><br/>
+    
+    Edition <select name="status">
+        <option value="firsted">First edition</option>
+        <option value="seconded">Second edition</option>
+        <option value="thirded">Third edition</option>
+    </select><br/>
+</div>
+
+    <span><button>Create</button></span>
+    <span><button style="display:none">Update</button></span>         
+
+</body>
+</html>

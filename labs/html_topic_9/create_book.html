@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View books</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Books</h1>
+<div><button>Create</button></div>
+
+<div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>The best book</td>
+            <td>JK Row</td>
+            <td>10</td>
+            <td><button>Update</button></td>
+            <td><button>Delete</button></td>
+        </tr>
+    </table>        
+</div>
+
+<h2><span id="formTitle">Create a book</span></h2>
+
+<div>
+    ID: <input type="text" name="id"><br/>
+    Title: <input type="text" name="title"><br/>
+    Author: <input type="text" name="author"><br/>
+    Price: <input type="text" name="price"><br/>
+    
+    Edition: 
+    <select name="status">
+        <option value="firsted">First edition</option>
+        <option value="seconded">Second edition</option>
+        <option value="thirded">Third edition</option>
+    </select><br/>
+</div>
+
+<button id="createBtn">Create</button>
+<button id="updateBtn" style="display:none">Update</button>
+
+<script>
+    document.getElementById("createBtn").addEventListener("click", function() {
+        this.style.display = "none";
+        document.getElementById("updateBtn").style.display = "inline";
+        document.getElementById("formTitle").innerText = "Update this book";
+    });
+</script>
+
+</body>
+</html>
