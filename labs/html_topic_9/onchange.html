@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose a Number</title>
+</head>
+<body>
+
+    <label for="numberInput">Enter a number:</label>
+    <input type="number" id="numberInput" onchange="checkNumber(this)" />
+    <br/>
+    <div id="output">Output here</div>
+
+    <script>
+        function checkNumber(inputElement) {
+            var value = parseFloat(inputElement.value); // Ensure it's a number
+            var outputElement = document.getElementById("output");
+
+            if (isNaN(value)) {
+                outputElement.innerText = "Please enter a valid number.";
+            } else if (value < 10) {
+                outputElement.innerText = "Too Low";
+            } else if (value > 20) {
+                outputElement.innerText = "Too High";
+            } else {
+                outputElement.innerText = "Perfect!";
+            }
+        }
+    </script>
+
+</body>
+</html>
