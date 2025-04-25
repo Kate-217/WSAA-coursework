@@ -34,6 +34,7 @@ CREATE TABLE results(
     id INT AUTO_INCREMENT PRIMARY KEY, 
     first_name VARCHAR(50),
     last_name VARCHAR(50),
+    sex ENUM('M', 'F'),
     age_group INT,
     event VARCHAR(50),
     date TIMESTAMP,
@@ -43,10 +44,10 @@ mycursor.execute(sql)
 
 # create test data
 sql = """
-INSERT INTO results (first_name, last_name, age_group, event, date, time)
-VALUES (%s, %s, %s, %s, %s, %s)
+INSERT INTO results (first_name, last_name, sex, age_group, event, date, time)
+VALUES (%s, %s, %s, %s, %s, %s, %s)
 """
-values = ("Kate", "Smith", 12, "50 Freestyle", "2025-02-01", "00:35:36")
+values = ("Kate", "Smith", "F", 12, "50 Freestyle", "2025-02-01", "00:35:36")
 
 mycursor.execute(sql,values)
 connection.commit()
