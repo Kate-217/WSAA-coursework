@@ -18,7 +18,7 @@ mycursor.execute("CREATE DATABASE swimmers")
 mycursor.close()
 connection.close()
 
- 
+# reconnection to swimmers 
 connection = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -40,5 +40,18 @@ CREATE TABLE results(
     time TIME
     )"""
 mycursor.execute(sql)
+
+# create test data
+sql = """
+INSERT INTO results (first_name, last_name, age_group, event, date, time)
+VALUES (%s, %s, %s, %s, %s, %s)
+"""
+values = ("Kate", "Smith", 12, "50 Freestyle", "2025-02-01", "00:35:36")
+
+mycursor.execute(sql,values)
+connection.commit()
 mycursor.close()
 connection.close()
+
+
+

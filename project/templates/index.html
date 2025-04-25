@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,5 +6,32 @@
 </head>
 <body>
     <h1>List of the swimmers and their GALA results</h1>
+
+    <table border="2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age Group</th>
+                <th>Event</th>
+                <th>GALA Date</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results %}   
+            <tr> 
+                <td>{{ row.id}}</td>
+                <td>{{ row.first_name }}</td>
+                <td>{{ row.last_name }}</td>
+                <td>{{ row.age_group}}</td>
+                <td>{{ row.event}}</td>
+                <td>{{ row.date}}</td>
+                <td>{{ row.time}}</td>
+            </tr> 
+            {% endfor %}
+        </tbody>
+    </table>               
 </body>
 </html>
