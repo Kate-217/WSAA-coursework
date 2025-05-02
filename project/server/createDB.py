@@ -37,7 +37,7 @@ CREATE TABLE results(
     sex ENUM('M', 'F'),
     age_group INT,
     event VARCHAR(50),
-    date TIMESTAMP,
+    date DATE,
     time TIME
     )"""
 mycursor.execute(sql)
