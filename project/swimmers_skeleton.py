@@ -1,6 +1,14 @@
-# Creating class 
+import mysql.connector
 
+# Creating class 
 class SwimmersDAO:
+    host = "localhost"
+    user = "root"
+    password = "rootroot"
+    database = "swimmers"
+    connection = ""
+    cursor = ""
+    
     # get all
     def get_all(self):
         return [{
@@ -40,3 +48,5 @@ class SwimmersDAO:
     # delete
     def delete(self, id):
         print (f"Swimmer with id {id} deleted")
+        
+    SwimmersDAO = SwimmersDAO()

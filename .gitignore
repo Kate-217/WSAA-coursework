@@ -172,4 +172,5 @@ cython_debug/
 
 config.py
 config1.py
+db_config.py
 

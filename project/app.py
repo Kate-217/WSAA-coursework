@@ -9,8 +9,7 @@ from swimmers_skeleton import SwimmersDAO
 
 app = Flask(__name__)
 
-# create object
-swim_dao = SwimmersDAO()
+
 
 # https://planetscale.com/learn/courses/mysql-for-python-developers/using-mysql-with-python/using-cursors
 # set the dictionary=True option to have the cursor return results
@@ -26,6 +25,11 @@ def home():
     cursor.close()
     connection.close()
     return render_template("index.html", results=sql_results)
+
+# to get all swimmers
+@app.route("/swimmers", methods=['GET'])
+def get_swimmers():
+    return jsonify(SwimmersDAO.get_all())
 
 
 
