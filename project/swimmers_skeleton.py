@@ -124,14 +124,24 @@ class SwimmersDAO:
         self.connection.commit()
         self.closeAll()
         return {"message": "Swimmer added successfully"}
-        
-    
-    
-    
-    
-    
-    # delete
+            
+    # delete by ID
     def delete(self, id):
-        print (f"Swimmer with id {id} deleted")
+        cursor = self.getCursor()
+        sql = "delete from results where id = %s"
+        values = (id,)
+        cursor.execute(sql, values)
+        self.connection.commit()
+        self.closeAll()
+        return {"message": "Swimmer's record deleted"}
+    
+    # Make a dict from keys and values
+    # https://stackoverflow.com/questions/209840/make-a-dictionary-dict-from-separate-lists-of-keys-and-values
+    
+    def convertToDict(self,resultline):
+        keys = ["id", "first_name", "last_name", "sex", "age_group", "event", "date", "time"]
+        dictionary = dict(zip(keys,resultline))
+        return dictionary
+        
         
     SwimmersDAO = SwimmersDAO()
