@@ -4,9 +4,9 @@ from db_config import db_config
 # Creating class 
 class SwimmersDAO:
     def __init__(self):
-        self.host = db_config["host"],
-        self.user = db_config["user"],
-        self.password = db_config["password"],
+        self.host = db_config["host"]
+        self.user = db_config["user"]
+        self.password = db_config["password"]
         self.database = db_config["database"]
     
     
@@ -44,40 +44,49 @@ class SwimmersDAO:
         sql = "SELECT * FROM results WHERE id = %s"
         values = (id,)
         cursor.execute(sql,values)
-        result = cursor.fetchall()
+        result = cursor.fetchone()
         self.closeAll()
         return self.convertToDict(result)
     
-        # find by age group
-    def find_by_id(self,age_group):
+    # find by age group
+    def find_by_age_group(self,age_group):
         cursor = self.getCursor()
         sql = "SELECT * FROM results WHERE age_group = %s"
         values = (age_group,)
         cursor.execute(sql,values)
         result = cursor.fetchall()
+        swimmers_list = []
+        for row in result:
+            swimmers_list.append(self.convertToDict(row))
         self.closeAll()
-        return self.convertToDict(result)
+        return swimmers_list
     
     
-        # only Girls
-    def find_by_id(self, sex):
+    # only Girls
+    def find_girls(self, sex):
         cursor = self.getCursor()
         sql = "SELECT * FROM results WHERE sex = %s"
         values = ("F",)
         cursor.execute(sql,values)
         result = cursor.fetchall()
+        swimmers_list = []
+        for row in result:
+            swimmers_list.append(self.convertToDict(row))
         self.closeAll()
-        return self.convertToDict(result)
+        return swimmers_list
     
-            # only Boys
-    def find_by_id(self, sex):
+    # only Boys
+    def find_boys(self, sex):
         cursor = self.getCursor()
         sql = "SELECT * FROM results WHERE sex = %s"
         values = ("M",)
         cursor.execute(sql,values)
         result = cursor.fetchall()
+        swimmers_list = []
+        for row in result:
+            swimmers_list.append(self.convertToDict(row))
         self.closeAll()
-        return self.convertToDict(result)
+        return swimmers_list
         
         
     # create a new gala result    
@@ -94,8 +103,7 @@ class SwimmersDAO:
             swimmer.get("age_group"),
             swimmer.get("event"),
             swimmer.get("date"),
-            swimmer.get("time"),
-            id
+            swimmer.get("time")
         )
         cursor.execute(sql, values)
         self.connection.commit()
@@ -106,17 +114,16 @@ class SwimmersDAO:
     def update(self, id, swimmer):
         cursor = self.getCursor()
         sql = """
-        update results SET first_name=%s, last_name=%s, sex=%s, age_group=%s, event=%s, date=%s, time=%s)
-        where id =%s
-        values (%s, %s, %s, %s, %s, %s, %s)
+        update results SET first_name=%s, last_name=%s, sex=%s, age_group=%s, event=%s, date=%s, time=%s
+        where id = %s
         """
         values = (
-            swimmer.get("first_name")
-            swimmer.get("last_name")
-            swimmer.get("sex")
-            swimmer.get("age_group")
-            swimmer.get("event")
-            swimmer.get("date")
+            swimmer.get("first_name"),
+            swimmer.get("last_name"),
+            swimmer.get("sex"),
+            swimmer.get("age_group"),
+            swimmer.get("event"),
+            swimmer.get("date"),
             swimmer.get("time"),
             id
         )
@@ -144,4 +151,4 @@ class SwimmersDAO:
         return dictionary
         
         
-    SwimmersDAO = SwimmersDAO()
+swimDAO = SwimmersDAO()    
