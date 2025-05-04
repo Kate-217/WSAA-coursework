@@ -26,14 +26,27 @@ class SwimmersDAO:
     
     
     # get all swimmers
-    def get_all(self):
+# code MySQL fixed with AI: 
+# Using TIME_FORMAT to convert MySQL TIME field into a string.
+# This prevents Python from returning a 'timedelta' object, which cannot be serialized to JSON.
+# The formatted string ('HH:MM:SS') is safe to use in templates and API responses.
+
+    def get_all(self, limit=10, offset=0):
         cursor = self.getCursor()
-        sql = "select * from results"
-        cursor.execute(sql)
-        result = cursor.fetchall()
-        swimmers_list = []
-        for row in result:
-            swimmers_list.append(self.convertToDict(row))
+        try:
+            sql = """
+                SELECT id, first_name, last_name, sex, age_group, event, date,
+                TIME_FORMAT(time, '%H:%i:%s') AS time
+                FROM results
+            """
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            swimmers_list = []
+            for row in result:
+                swimmers_list.append(self.convertToDict(row))
+            return swimmers_list
+        finally:
+            self.closeAll()
         self.closeAll()
         return swimmers_list
     
@@ -108,7 +121,7 @@ class SwimmersDAO:
         cursor.execute(sql, values)
         self.connection.commit()
         self.closeAll()
-        return {"message": "Swimmer's record updated"}
+        return {"message": "Swimmer's record created"}
                 
     # update swimmer record   
     def update(self, id, swimmer):
@@ -130,7 +143,7 @@ class SwimmersDAO:
         cursor.execute(sql, values)
         self.connection.commit()
         self.closeAll()
-        return {"message": "Swimmer added successfully"}
+        return {"message": "Swimmer's record updated successfully"}
             
     # delete by ID
     def delete(self, id):
@@ -145,6 +158,7 @@ class SwimmersDAO:
     # Make a dict from keys and values
     # https://stackoverflow.com/questions/209840/make-a-dictionary-dict-from-separate-lists-of-keys-and-values
     
+    # 
     def convertToDict(self,resultline):
         keys = ["id", "first_name", "last_name", "sex", "age_group", "event", "date", "time"]
         dictionary = dict(zip(keys,resultline))
