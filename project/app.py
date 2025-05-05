@@ -10,14 +10,13 @@ from swimmers_skeleton import swimDAO
 app = Flask(__name__, static_url_path='', static_folder='static')
 
 
-
 # https://planetscale.com/learn/courses/mysql-for-python-developers/using-mysql-with-python/using-cursors
 # set the dictionary=True option to have the cursor return results
 # as a list of dictionaries instead of the default tuple of tuples.
 
 @app.route("/")
 def home():
-    sql = "SELECT * FROM results"
+    sql = "SELECT * FROM results LIMIT 30"
     connection = get_connection()
     cursor = connection.cursor(dictionary=True)
     cursor.execute(sql)

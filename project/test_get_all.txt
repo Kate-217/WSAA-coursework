@@ -1,0 +1,52 @@
+[
+  {
+    "age_group": 12,
+    "date": "Sat, 01 Feb 2025 00:00:00 GMT",
+    "event": "50 Freestyle",
+    "first_name": "Kate",
+    "id": 1,
+    "last_name": "Smith",
+    "sex": "F",
+    "time": "00:35:36"
+  },
+  {
+    "age_group": 14,
+    "date": "Thu, 01 May 2025 00:00:00 GMT",
+    "event": "100 Butterfly",
+    "first_name": "Liam",
+    "id": 2,
+    "last_name": "Brown",
+    "sex": "M",
+    "time": "00:58:24"
+  },
+  {
+    "age_group": 11,
+    "date": "Thu, 01 May 2025 00:00:00 GMT",
+    "event": "100 Freestyle",
+    "first_name": "Grace",
+    "id": 3,
+    "last_name": "Londra",
+    "sex": "F",
+    "time": "01:26:35"
+  },
+  {
+    "age_group": 12,
+    "date": "Wed, 24 Apr 2024 00:00:00 GMT",
+    "event": "100 Butterfly",
+    "first_name": "Hannah",
+    "id": 4,
+    "last_name": "Power",
+    "sex": "F",
+    "time": "01:45:24"
+  },
+  {
+    "age_group": 12,
+    "date": "Wed, 24 Apr 2024 00:00:00 GMT",
+    "event": "200 IM",
+    "first_name": "Conor",
+    "id": 5,
+    "last_name": "O'Donnell",
+    "sex": "M",
+    "time": "02:59:24"
+  }
+]

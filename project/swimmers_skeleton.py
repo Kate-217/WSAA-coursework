@@ -25,7 +25,7 @@ class SwimmersDAO:
         self.cursor.close()
     
     
-    # get all swimmers
+# get all swimmers
 # code MySQL fixed with AI: 
 # Using TIME_FORMAT to convert MySQL TIME field into a string.
 # This prevents Python from returning a 'timedelta' object, which cannot be serialized to JSON.
