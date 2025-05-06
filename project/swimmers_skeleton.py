@@ -33,11 +33,7 @@ class SwimmersDAO:
     def get_all(self, limit=10, offset=0):
         cursor = self.getCursor()
         try:
-            sql = """
-                SELECT id, first_name, last_name, sex, age_group, event, date,
-                TIME_FORMAT(time, '%H:%i:%s') AS time
-                FROM results
-            """
+            sql = "select * from results"
             cursor.execute(sql)
             result = cursor.fetchall()
             swimmers_list = []

@@ -42,7 +42,7 @@ def create_result():
             abort(400, description=f'Missing required field: {i}')
         swimmer[i] = jsonstring[i]
 
-    return jsonify(swimDAO.create(swimmer)), 201
+    return jsonify(swimDAO.create(swimmer))
 
 
 # find by ID 
@@ -54,6 +54,29 @@ def find_swimmer(id):
     else:
         return jsonify({"message": "Swimmer is not found"})
 
+
+# find by age
+# only girls
+# only boys
+
+# update
+@app.route("/results/<int:id>", methods=['PUT'])
+def update_result(id):
+    jsonstring = request.json
+    swimmer = swimDAO.find_by_id(id)
+    
+    if not swimmer:
+        return jsonify({"message": "Swimmer is not found"})
+
+    swimmer = {}
+    new_data = ["first_name", "last_name", "sex", "age_group", "event", "date", "time"]
+    for i in new_data:
+        if i in jsonstring:
+            swimmer[i] = jsonstring[i]
+
+    return jsonify(swimDAO.update(id, swimmer))
+
+# delete
 
 
 
