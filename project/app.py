@@ -16,14 +16,7 @@ app = Flask(__name__, static_url_path='', static_folder='static')
 
 @app.route("/")
 def home():
-    sql = "SELECT * FROM results LIMIT 30"
-    connection = get_connection()
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute(sql)
-    sql_results = cursor.fetchall()
-    cursor.close()
-    connection.close()
-    return render_template("index.html", results=sql_results)
+    return render_template("index.html", results=swimDAO.get_all())
 
 # to get all swimmers
 @app.route("/results", methods=['GET'])
@@ -87,7 +80,7 @@ def get_boys():
     if swimmers:
         return jsonify(swimmers)
     else:
-        return jsonify({"message": "No male swimmers found"})
+        return jsonify({"message": "No  swimmers found"})
 
 # curl http://127.0.0.1:5000/results/boys
 
