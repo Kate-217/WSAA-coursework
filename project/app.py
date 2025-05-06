@@ -56,8 +56,40 @@ def find_swimmer(id):
 
 
 # find by age
+@app.route("/results/age/<int:age_group>", methods=['GET'])
+def find_by_age(age_group):
+    #print("age group:",age_group)
+    swimmers = swimDAO.find_by_age_group(age_group)
+    #print("found:", swimmers)
+    if swimmers:
+        return jsonify(swimmers)
+    else:
+        return jsonify({"message": "Swimmers are not found"})
+
+# curl http://127.0.0.1:5000/results/age/12
+    
 # only girls
+@app.route("/results/girls", methods=['GET'])
+def get_girls():
+    swimmers = swimDAO.find_girls()
+    if swimmers:
+        return jsonify(swimmers)
+    else:
+        return jsonify({"message": "No female swimmers found"})
+
+# curl http://127.0.0.1:5000/results/girls
+
+
 # only boys
+@app.route("/results/boys", methods=['GET'])
+def get_boys():
+    swimmers = swimDAO.find_boys()
+    if swimmers:
+        return jsonify(swimmers)
+    else:
+        return jsonify({"message": "No male swimmers found"})
+
+# curl http://127.0.0.1:5000/results/boys
 
 # update
 @app.route("/results/<int:id>", methods=['PUT'])
@@ -77,7 +109,15 @@ def update_result(id):
     return jsonify(swimDAO.update(id, swimmer))
 
 # delete
+@app.route("/results/<int:id>", methods=['DELETE'])
+def delete_record(id):
+    swimmer = swimDAO.find_by_id(id)
+    
+    if not swimmer:
+        return jsonify({"message": "Swimmer is not found"})
+    return jsonify(swimDAO.delete(id))
 
+# curl -X DELETE http://127.0.0.1:5000/results/1
 
 
 

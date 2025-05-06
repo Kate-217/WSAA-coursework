@@ -76,7 +76,7 @@ class SwimmersDAO:
     
     
     # only Girls
-    def find_girls(self, sex):
+    def find_girls(self):
         cursor = self.getCursor()
         sql = "SELECT * FROM results WHERE sex = %s"
         values = ("F",)
@@ -89,7 +89,7 @@ class SwimmersDAO:
         return swimmers_list
     
     # only Boys
-    def find_boys(self, sex):
+    def find_boys(self):
         cursor = self.getCursor()
         sql = "SELECT * FROM results WHERE sex = %s"
         values = ("M",)
