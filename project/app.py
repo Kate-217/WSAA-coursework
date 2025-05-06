@@ -45,5 +45,19 @@ def create_result():
     return jsonify(swimDAO.create(swimmer)), 201
 
 
+# find by ID 
+@app.route("/results/<int:id>", methods=['GET'])
+def find_swimmer(id):
+    swimmer = swimDAO.find_by_id(id)
+    if swimmer:
+        return jsonify(swimmer)
+    else:
+        return jsonify({"message": "Swimmer is not found"})
+
+
+
+
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="127.0.0.1", port=5000, debug=True)

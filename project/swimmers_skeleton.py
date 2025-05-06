@@ -23,13 +23,12 @@ class SwimmersDAO:
     def closeAll(self):
         self.connection.close()
         self.cursor.close()
-    
-    
-# get all swimmers
-# code MySQL fixed with AI: 
-# Using TIME_FORMAT to convert MySQL TIME field into a string.
-# This prevents Python from returning a 'timedelta' object, which cannot be serialized to JSON.
-# The formatted string ('HH:MM:SS') is safe to use in templates and API responses.
+
+    # get all swimmers
+    # code MySQL fixed with AI: 
+    # Using TIME_FORMAT to convert MySQL TIME field into a string.
+    # This prevents Python from returning a 'timedelta' object, which cannot be serialized to JSON.
+    # The formatted string ('HH:MM:SS') is safe to use in templates and API responses.
 
     def get_all(self, limit=10, offset=0):
         cursor = self.getCursor()
@@ -52,14 +51,19 @@ class SwimmersDAO:
     
     
     # find by id
-    def find_by_id(self,id):
+    def find_by_id(self, id):
         cursor = self.getCursor()
-        sql = "SELECT * FROM results WHERE id = %s"
-        values = (id,)
-        cursor.execute(sql,values)
-        result = cursor.fetchone()
-        self.closeAll()
-        return self.convertToDict(result)
+        try:
+            sql = "select * from results where id = %s"
+            values = (id,)
+            cursor.execute(sql, values)
+            result = cursor.fetchone()
+            if not result:
+                return None
+            return self.convertToDict(result)
+        finally:
+            self.closeAll()
+            
     
     # find by age group
     def find_by_age_group(self,age_group):
@@ -162,7 +166,20 @@ class SwimmersDAO:
     def convertToDict(self,resultline):
         keys = ["id", "first_name", "last_name", "sex", "age_group", "event", "date", "time"]
         dictionary = dict(zip(keys,resultline))
-        return dictionary
         
+        # Fix a problem with AI
+        # TIME_FORMAT with escaped %% did not work — caused SQL parameter mismatch.
+        # Converts MySQL TIME (timedelta) to "HH:MM:SS" string for JSON response.
+        if hasattr(dictionary["time"], 'seconds'):
+            total_seconds = int(dictionary["time"].total_seconds())
+            hours = total_seconds // 3600
+            minutes = (total_seconds % 3600) // 60
+            seconds = total_seconds % 60
+            dictionary["time"] = f"{hours:02}:{minutes:02}:{seconds:02}"
+        else:
+            dictionary["time"] = str(dictionary["time"])
+
+        return dictionary
+            
         
 swimDAO = SwimmersDAO()    
