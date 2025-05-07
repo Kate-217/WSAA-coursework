@@ -30,7 +30,10 @@
     
     <div id="createUpdateForm" style="display:none">
         <h3>
+            <!--Create is shown on the page-->
             <span id="createLabel">Create</span>
+
+            <!--Update is invisible-->
             <span id="updateLabel" style="display:none">Update</span> Swimmer
         </h3>
         <input type="hidden" name="id"/>
@@ -55,20 +58,55 @@
 
         // add swimmer
         function doCreate() {
-            const form = document.getElementById("createUpdateForm");
-            const timeVal = form.querySelector('input[name="time"]').value;
 
-            if (!isValidTimeFormat(timeVal)) {
-            alert("Please enter time in MM:SS:ss format (e.g., 02:45:37)");
+            // get the form
+            const form = document.getElementById("createUpdateForm");
+
+            const swimmer = {
+                first_name: form.querySelector('input[name="first_name"]').value,
+                last_name: form.querySelector('input[name="last_name"]').value,
+                sex: form.querySelector('input[name="sex"]').value,
+                age_group: form.querySelector('input[name="age_group"]').value,
+                event: form.querySelector('input[name="event"]').value,
+                date: form.querySelector('input[name="date"]').value,
+                time: form.querySelector('input[name="time"]').value
+
+            };
+            // get the time and check if it is valid
+
+            if (!isValidTimeFormat(swimmer.time)) {
+                alert("Please enter time in MM:SS:ss format (e.g., 02:45:37)");
                 return;
             }    
-
-            alert("Time format is correct")
+            $.ajax({
+                url: "/results",
+                method: "POST",
+                data: JSON.stringify(swimmer),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    addSwimmerToTable(result);
+                    alert("Swimmer added!");
+                    form.reset();
+                    document.getElementById("createUpdateForm").style.display = "none";
+        },
+        error: function (xhr, status, error) {
+            alert("Failed to create swimmer: " + error);
+            console.log(xhr.responseText);
         }
+    });
 
-        // create swimmer
-        
-        // get all
+        function showCreate() {
+    document.getElementById("createUpdateForm").style.display = "block";
+    document.getElementById("showCreateButton").style.display = "none";
+}
+}
+
+
+
+
+
+        // get all from flusk
 
         function getAllswimmers() {
             $.ajax({
@@ -86,11 +124,14 @@
             });
         }
         // add swimmer
+        
         function addSwimmerToTable(swimmer) {
+        // get element <tbody> and add a row    
     const table = document.getElementById("swimmerBody");
-
+       // create a table raw     
     const row = document.createElement("tr");
-            // create a table raw
+    row.setAttribute("id","row-" + swimmer.id); // to call the row
+            
     row.innerHTML = `
         <td>${swimmer.id}</td>
         <td>${swimmer.first_name}</td>
@@ -112,19 +153,27 @@ function showUpdate(id) {
 }
     // delete
 function doDelete(id) {
-    alert("Delete swimmer ID: " + id);
+    if (!confirm("Do you want to delete the swimmer ID: " + id + "?"))
+    return;
+
+    $.ajax({
+        url: `/results/${id}`,
+        method: "DELETE",
+        success: function () {
+            // remove row from table
+            const row = document.getElementById("row-" + id);
+            if (row) row.remove();
+        },
+        error: function (xhr, status, error) {
+            alert("Failed to delete swimmer: " + error);
+        }
+    });
 }
 
 
 
-    getAllswimmers();
 
-
-
-
-
-
-
+getAllswimmers();
 
 
 
