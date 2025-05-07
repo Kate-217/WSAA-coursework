@@ -6,38 +6,46 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
-    <h1>List of the swimmers and their GALA results</h1>
-    <button id="showCreareButton" onclick="showCreate()">Add Swimmer</button>
+        <h1>Swimmers GALA records</h1>
+        <button id="showCreareButton" onclick="showCreate()">Add Swimmer</button>
 
-    <table class="table" id="swimmerTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Sex</th>
-                <th>Age Group</th>
-                <th>Event</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Update</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody</tbody>
-    </table>
-  <div id="createUpdateForm" style="display:none">
-    <h3>
-        <span id="createLabel">Create</span>
-        <span id="updateLabel" style="display:none">Update</span>Swimmer</span>
-    </h3>
-    <input type="hidden" name="id"/>
-    First Name: <input type="text" name="first_name"><br/>
-    Last Name: <input type="text" name="last_name"><br/>
-    Sex: <input type="text" name="sex"><br/>
-    Age Group: <input type="number" name="age_group"><br/>
-    Event: <input type="text" name="event"><br/>
-    Date: <input type="date" name="date"><br/>
-    Time: <input type="text" name="time" placeholder="MM:SS:ss"><br/>     
+        <table class="table" id="swimmerTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Sex</th>
+                    <th>Age Group</th>
+                    <th>Event</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody</tbody>
+        </table>
+    <div id="createUpdateForm" style="display:none">
+        <h3>
+            <span id="createLabel">Create</span>
+            <span id="updateLabel" style="display:none">Update</span>Swimmer</span>
+        </h3>
+        <input type="hidden" name="id"/>
+        First Name: <input type="text" name="first_name"><br/>
+        Last Name: <input type="text" name="last_name"><br/>
+        Sex: <input type="text" name="sex"><br/>
+        Age Group: <input type="number" name="age_group"><br/>
+        Event: <input type="text" name="event"><br/>
+        Date: <input type="date" name="date"><br/>
+        Time: <input type="text" name="time" placeholder="MM:SS:ss"><br/>  
+        <button id="doUpdateButton onclick="doUpdate()" style="display:none">Update</button>
+    </div>
+
+    <script>
+        console.log("First step done")
+    </script>
+
+
 </body>
 </html>
