@@ -1,15 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Swimmers</title>
+    <!-- Load jQuery from CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
     <h1>Swimmers GALA records</h1>
     
+    <!-- Button to show the create form -->
     <button id="showCreateButton" onclick="showCreate()">Add Swimmer</button>
 
+    <!-- Swimmers table -->
     <table border="2" class="table" id="swimmerTable">
         <thead>
             <tr>
@@ -28,12 +30,10 @@
         <tbody id="swimmerBody"></tbody>  
     </table>
     
+    <!-- Create/Update swimmer form (hidden by default) -->
     <div id="createUpdateForm" style="display:none">
         <h3>
-            <!--Create is shown on the page-->
             <span id="createLabel">Create</span>
-
-            <!--Update is invisible-->
             <span id="updateLabel" style="display:none">Update</span> Swimmer
         </h3>
         <input type="hidden" name="id"/>
@@ -47,19 +47,22 @@
         
         <button id="doCreateButton" onclick="doCreate()">Create</button>
         <button id="doUpdateButton" onclick="doUpdate()" style="display:none">Update</button>
-
     </div>
 
     <script>
-        // check time format
+        // Validate time format (MM:SS:ss)
         function isValidTimeFormat(timeStr) {
-            return /^\d{2}:\d{2}:\d{2}$/.test(timeStr); 
+            return /^\d{2}:\d{2}:\d{2}$/.test(timeStr);
         }
 
-        // add swimmer
-        function doCreate() {
+        // Show the create form
+        function showCreate() {
+            document.getElementById("createUpdateForm").style.display = "block";
+            document.getElementById("showCreateButton").style.display = "none";
+        }
 
-            // get the form
+        // Create swimmer using form input and send to server
+        function doCreate() {
             const form = document.getElementById("createUpdateForm");
 
             const swimmer = {
@@ -70,14 +73,15 @@
                 event: form.querySelector('input[name="event"]').value,
                 date: form.querySelector('input[name="date"]').value,
                 time: form.querySelector('input[name="time"]').value
-
             };
-            // get the time and check if it is valid
 
+            // Check time format
             if (!isValidTimeFormat(swimmer.time)) {
                 alert("Please enter time in MM:SS:ss format (e.g., 02:45:37)");
                 return;
-            }    
+            }
+
+            // POST to /results
             $.ajax({
                 url: "/results",
                 method: "POST",
@@ -85,37 +89,32 @@
                 contentType: "application/json",
                 dataType: "json",
                 success: function (result) {
-                    addSwimmerToTable(result);
-                    alert("Swimmer added!");
+                    // reload all swimmers
+                    document.getElementById("swimmerBody").innerHTML="";
+                    getAllswimmers(); //reload updated data
+                    alert("Swimmer added");
+
+                    // reset form
                     form.reset();
                     document.getElementById("createUpdateForm").style.display = "none";
-        },
-        error: function (xhr, status, error) {
-            alert("Failed to create swimmer: " + error);
-            console.log(xhr.responseText);
+                    document.getElementById("showCreateButton").style.display = "block";
+                },
+                error: function (xhr, status, error) {
+                    alert("Failed to create swimmer: " + error);
+                    console.log(xhr.responseText);
+                }
+            });
         }
-    });
 
-        function showCreate() {
-    document.getElementById("createUpdateForm").style.display = "block";
-    document.getElementById("showCreateButton").style.display = "none";
-}
-}
-
-
-
-
-
-        // get all from flusk
-
+        // Load all swimmers from the server on page load
         function getAllswimmers() {
             $.ajax({
                 url: "/results",
                 method: "GET",
                 dataType: "json",
-                success: function (data) { // data - list of swimmers in json
+                success: function (data) {
                     for (let swimmer of data) {
-                        addSwimmerToTable(swimmer);// each swimmer will be added with this function
+                        addSwimmerToTable(swimmer);
                     }
                 },
                 error: function (xhr, status, error) {
@@ -123,62 +122,53 @@
                 }
             });
         }
-        // add swimmer
-        
+
+        // Add one swimmer to the HTML table
         function addSwimmerToTable(swimmer) {
-        // get element <tbody> and add a row    
-    const table = document.getElementById("swimmerBody");
-       // create a table raw     
-    const row = document.createElement("tr");
-    row.setAttribute("id","row-" + swimmer.id); // to call the row
-            
-    row.innerHTML = `
-        <td>${swimmer.id}</td>
-        <td>${swimmer.first_name}</td>
-        <td>${swimmer.last_name}</td>
-        <td>${swimmer.sex}</td>
-        <td>${swimmer.age_group}</td>
-        <td>${swimmer.event}</td>
-        <td>${swimmer.date}</td>
-        <td>${swimmer.time}</td>
-        <td><button onclick="showUpdate(${swimmer.id})">Update</button></td>
-        <td><button onclick="doDelete(${swimmer.id})">Delete</button></td>
-    `;
+            const table = document.getElementById("swimmerBody");
+            const row = document.createElement("tr");
+            row.setAttribute("id", "row-" + swimmer.id);
 
-    table.appendChild(row);
-}
-    // update
-function showUpdate(id) {
-    alert("Update swimmer ID: " + id);
-}
-    // delete
-function doDelete(id) {
-    if (!confirm("Do you want to delete the swimmer ID: " + id + "?"))
-    return;
+            row.innerHTML = `
+                <td>${swimmer.id}</td>
+                <td>${swimmer.first_name}</td>
+                <td>${swimmer.last_name}</td>
+                <td>${swimmer.sex}</td>
+                <td>${swimmer.age_group}</td>
+                <td>${swimmer.event}</td>
+                <td>${swimmer.date}</td>
+                <td>${swimmer.time}</td>
+                <td><button onclick="showUpdate(${swimmer.id})">Update</button></td>
+                <td><button onclick="doDelete(${swimmer.id})">Delete</button></td>
+            `;
 
-    $.ajax({
-        url: `/results/${id}`,
-        method: "DELETE",
-        success: function () {
-            // remove row from table
-            const row = document.getElementById("row-" + id);
-            if (row) row.remove();
-        },
-        error: function (xhr, status, error) {
-            alert("Failed to delete swimmer: " + error);
+            table.appendChild(row);
         }
-    });
-}
 
+        // Placeholder update logic
+        function showUpdate(id) {
+            alert("Update swimmer ID: " + id);
+        }
 
+        // Delete swimmer by ID
+        function doDelete(id) {
+            if (!confirm("Do you want to delete swimmer ID: " + id + "?")) return;
 
+            $.ajax({
+                url: `/results/${id}`,
+                method: "DELETE",
+                success: function () {
+                    const row = document.getElementById("row-" + id);
+                    if (row) row.remove();
+                },
+                error: function (xhr, status, error) {
+                    alert("Failed to delete swimmer: " + error);
+                }
+            });
+        }
 
-getAllswimmers();
-
-
-
+        // Get all
+        getAllswimmers();
     </script>
-
-
 </body>
 </html>
