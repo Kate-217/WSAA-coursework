@@ -38,7 +38,7 @@ CREATE TABLE results(
     age_group INT,
     event VARCHAR(50),
     date DATE,
-    time TIME
+    time VARCHAR(10)
     )"""
 mycursor.execute(sql)
 
