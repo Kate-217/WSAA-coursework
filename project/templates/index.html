@@ -161,11 +161,90 @@
             table.appendChild(row);
         }
 
-        // Placeholder update logic
+        // update record 
         function showUpdate(id) {
-            alert("Update swimmer ID: " + id);
+            const row = document.getElementById("row-" + id);
+
+            // get data from table
+            const swimmer = {
+                id: id,
+                first_name: row.cells[1].textContent,
+                last_name: row.cells[2].textContent,
+                sex: row.cells[3].textContent,
+                age_group: row.cells[4].textContent,
+                event: row.cells[5].textContent,
+                date: row.cells[6].textContent,
+                time: row.cells[7].textContent,
+            };
+
+            const form = document.getElementById("createUpdateForm");
+            form.style.display = "block";
+            document.getElementById("showCreateButton").style.display = "none"
+
+            // fill in form fields
+            form.querySelector('input[name="id"]').value = swimmer.id;
+            form.querySelector('input[name="first_name"]').value = swimmer.first_name;
+            form.querySelector('input[name="last_name"]').value = swimmer.last_name;
+            form.querySelector('select[name="sex"]').value = swimmer.sex;
+            form.querySelector('input[name="age_group"]').value = swimmer.age_group;
+            form.querySelector('select[name="event"]').value = swimmer.event;
+            form.querySelector('input[name="date"]').value = swimmer.date;
+            form.querySelector('input[name="time"]').value = swimmer.time;
+
+            document.getElementById("doCreateButton").style.display = "none";
+            document.getElementById("doUpdateButton").style.display = "inline";
         }
 
+        function doUpdate() {
+    const form = document.getElementById("createUpdateForm");
+    const id = form.querySelector('input[name="id"]').value;
+
+    const swimmer = {
+        first_name: form.querySelector('input[name="first_name"]').value,
+        last_name: form.querySelector('input[name="last_name"]').value,
+        sex: form.querySelector('select[name="sex"]').value,
+        age_group: form.querySelector('input[name="age_group"]').value,
+        event: form.querySelector('select[name="event"]').value,
+        date: form.querySelector('input[name="date"]').value,
+        time: form.querySelector('input[name="time"]').value
+    };
+
+    if (!isValidTimeFormat(swimmer.time)) {
+        alert("Please enter time in MM:SS:ss format");
+        return;
+    }
+
+    $.ajax({
+        url: `/results/${id}`,
+        method: "PUT",
+        data: JSON.stringify(swimmer),
+        contentType: "application/json",
+        success: function () {
+            alert("Swimmer updated!");
+
+            // Refresh the row
+            const row = document.getElementById("row-" + id);
+            row.cells[1].textContent = swimmer.first_name;
+            row.cells[2].textContent = swimmer.last_name;
+            row.cells[3].textContent = swimmer.sex;
+            row.cells[4].textContent = swimmer.age_group;
+            row.cells[5].textContent = swimmer.event;
+            row.cells[6].textContent = swimmer.date;
+            row.cells[7].textContent = swimmer.time;
+
+            // Clear form
+            form.reset();
+            document.getElementById("createUpdateForm").style.display = "none";
+            document.getElementById("showCreateButton").style.display = "block";
+        },
+        error: function (xhr, status, error) {
+            alert("Failed to update swimmer: " + error);
+            console.log(xhr.responseText);
+        }
+    });
+}
+
+            
         // Delete swimmer by ID
         function doDelete(id) {
             if (!confirm("Do you want to delete swimmer ID: " + id + "?")) return;
