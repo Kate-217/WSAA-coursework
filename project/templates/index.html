@@ -3,11 +3,13 @@
 <html lang="en">
 <head>
     <title>Swimmers</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
     <h1>List of the swimmers and their GALA results</h1>
+    <button id="showCreareButton" onclick="showCreate()">Add Swimmer</button>
 
-    <table border="2">
+    <table class="table" id="swimmerTable">
         <thead>
             <tr>
                 <th>ID</th>
@@ -16,24 +18,26 @@
                 <th>Sex</th>
                 <th>Age Group</th>
                 <th>Event</th>
-                <th>Gala Date</th>
+                <th>Date</th>
                 <th>Time</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
         </thead>
-        <tbody>
-            {% for row in results %}   
-            <tr> 
-                <td>{{ row.id}}</td>
-                <td>{{ row.first_name }}</td>
-                <td>{{ row.last_name }}</td>
-                <td>{{ row.sex }}</td>
-                <td>{{ row.age_group}}</td>
-                <td>{{ row.event}}</td>
-                <td>{{ row.date}}</td>
-                <td>{{ row.time}}</td>
-            </tr> 
-            {% endfor %}
-        </tbody>
-    </table>               
+        <tbody</tbody>
+    </table>
+  <div id="createUpdateForm" style="display:none">
+    <h3>
+        <span id="createLabel">Create</span>
+        <span id="updateLabel" style="display:none">Update</span>Swimmer</span>
+    </h3>
+    <input type="hidden" name="id"/>
+    First Name: <input type="text" name="first_name"><br/>
+    Last Name: <input type="text" name="first_name"><br/>
+    First Name: <input type="text" name="first_name"><br/>
+    First Name: <input type="text" name="first_name"><br/>
+    First Name: <input type="text" name="first_name"><br/>
+    First Name: <input type="text" name="first_name"><br/>
+    First Name: <input type="text" name="first_name"><br/>     
 </body>
 </html>
