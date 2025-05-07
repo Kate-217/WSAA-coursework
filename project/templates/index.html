@@ -8,8 +8,32 @@
 <body>
     <h1>Swimmers GALA records</h1>
     
-    <!-- Button to show the create form -->
-    <button id="showCreateButton" onclick="showCreate()">Add Swimmer</button>
+    <div style="margin-bottom: 1em;">
+        <!-- Top row: Add and Show All -->
+        <button id="showCreateButton" onclick="showCreate()">Add Swimmer</button>
+        <button onclick="getAllswimmers()">Show All</button>
+    </div>
+    
+    <!-- Empty spacer row -->
+    <div style="height: 10px;"></div>
+    
+    <!-- Second row: Filter controls -->
+    <div style="margin-bottom: 1em;">
+        <label for="ageFilterSelect">Show age group:</label>
+        <select id="ageFilterSelect" onchange="filterByAgeSelect()">
+            <option value="">-- Select Age --</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+        </select>
+    
+        <label style="margin-left: 20px;">Sex:</label>
+        <input type="radio" name="sexFilter" value="F" onclick="filterBySex('girls')"> F
+        <input type="radio" name="sexFilter" value="M" onclick="filterBySex('boys')"> M
+    </div>
+    
 
     <!-- Swimmers table -->
     <table border="2" class="table" id="swimmerTable">
@@ -84,9 +108,9 @@
             const swimmer = {
                 first_name: form.querySelector('input[name="first_name"]').value,
                 last_name: form.querySelector('input[name="last_name"]').value,
-                sex: form.querySelector('input[name="sex"]').value,
+                sex: form.querySelector('select[name="sex"]').value,
                 age_group: form.querySelector('input[name="age_group"]').value,
-                event: form.querySelector('input[name="event"]').value,
+                event: form.querySelector('select[name="event"]').value,
                 date: form.querySelector('input[name="date"]').value,
                 time: form.querySelector('input[name="time"]').value
             };
@@ -152,7 +176,7 @@
                 <td>${swimmer.sex}</td>
                 <td>${swimmer.age_group}</td>
                 <td>${swimmer.event}</td>
-                <td>${swimmer.date}</td>
+                <td>${formatDate(swimmer.date)}</td>
                 <td>${swimmer.time}</td>
                 <td><button onclick="showUpdate(${swimmer.id})">Update</button></td>
                 <td><button onclick="doDelete(${swimmer.id})">Delete</button></td>
@@ -262,8 +286,53 @@
             });
         }
 
+        function filterByAgeSelect() {
+    const age = document.getElementById("ageFilterSelect").value;
+    if (!age) return;
+
+    $.ajax({
+        url: `/results/age/${age}`,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            document.getElementById("swimmerBody").innerHTML = "";
+            for (let swimmer of data) {
+                addSwimmerToTable(swimmer);
+            }
+        },
+        error: function (xhr, status, error) {
+            alert("Failed to filter by age: " + error);
+        }
+    });
+}
+
+function filterBySex(type) {
+    $.ajax({
+        url: `/results/${type}`,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            document.getElementById("swimmerBody").innerHTML = "";
+            for (let swimmer of data) {
+                addSwimmerToTable(swimmer);
+            }
+        },
+        error: function (xhr, status, error) {
+            alert("Failed to filter by sex: " + error);
+        }
+    });
+}
+// the problem with data in wrong format solved with AI tool
+function formatDate(dateString) {
+    const dateObj = new Date(dateString);
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // January is 0
+    const year = dateObj.getFullYear();
+    return `${day}.${month}.${year}`;
+}
+
         // Get all
-        getAllswimmers();
+getAllswimmers();
     </script>
 </body>
 </html>
