@@ -100,6 +100,16 @@
         function showCreate() {
             document.getElementById("createUpdateForm").style.display = "block";
             document.getElementById("showCreateButton").style.display = "none";
+
+            document.getElementById("createLabel").style.display = "inline";
+            document.getElementById("updateLabel").style.display = "none";
+
+            document.getElementById("doCreateButton").style.display = "inline";
+            document.getElementById("doUpdateButton").style.display = "none";
+
+            const form = document.getElementById("createUpdateForm");
+            form.reset();
+
         }
 
         // Create swimmer using form input and send to server
@@ -213,6 +223,15 @@
             form.style.display = "block";
             document.getElementById("showCreateButton").style.display = "none"
 
+            // Показать Update, скрыть Create
+            document.getElementById("createLabel").style.display = "none";
+            document.getElementById("updateLabel").style.display = "inline";
+
+            document.getElementById("doCreateButton").style.display = "none";
+            document.getElementById("doUpdateButton").style.display = "inline";
+
+
+
             // fill in form fields
             form.querySelector('input[name="id"]').value = swimmer.id;
             form.querySelector('input[name="first_name"]').value = swimmer.first_name;
@@ -223,8 +242,7 @@
             form.querySelector('input[name="date"]').value = swimmer.date;
             form.querySelector('input[name="time"]').value = swimmer.time;
 
-            document.getElementById("doCreateButton").style.display = "none";
-            document.getElementById("doUpdateButton").style.display = "inline";
+        
         }
 
         function doUpdate() {

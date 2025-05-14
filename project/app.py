@@ -7,7 +7,7 @@ from db_connection import get_connection
 from swimmers_skeleton import swimDAO
 
 
-app = Flask(__name__, static_url_path='', static_folder='static')
+app = Flask(__name__)
 
 
 # https://planetscale.com/learn/courses/mysql-for-python-developers/using-mysql-with-python/using-cursors
@@ -39,19 +39,9 @@ def create_result():
         swimmer[i] = jsonstring[i]
 
     return jsonify(swimDAO.create(swimmer))
+# curl -X POST http://127.0.0.1:5000/results -H "Content-Type: application/json" -d '{"first_name":"Anna","last_name":"Smith","sex":"F","age_group":12,"event":"100m Freestyle","date":"2025-05-20","time":"00:01:23"}'
 
-# curl -X POST http://127.0.0.1:5000/results \
- #-H "Content-Type: application/json" \
- #-d '{
- #      "first_name": "Anna",
- #      "last_name": "Smith",
- #      "sex": "F",
- #      "age_group": 12,
- #      "event": "100m Butterfly",
- #      "date": "2025-05-20",
- #      "time": "00:01:25"
- #  }'
-#
+
 
 # find by ID 
 @app.route("/results/<int:id>", methods=['GET'])
@@ -112,32 +102,20 @@ def get_boys():
 @app.route("/results/<int:id>", methods=['PUT'])
 def update_result(id):
     jsonstring = request.json
-    swimmer = swimDAO.find_by_id(id)
+    existing_swimmer = swimDAO.find_by_id(id)
     
-    if not swimmer:
+    if not existing_swimmer:
         return jsonify({"message": "Swimmer is not found"})
 
-    swimmer = {}
+    updated_swimmer = {}
     new_data = ["first_name", "last_name", "sex", "age_group", "event", "date", "time"]
     for i in new_data:
         if i in jsonstring:
-            swimmer[i] = jsonstring[i]
+            updated_swimmer[i] = jsonstring[i]
 
-    return jsonify(swimDAO.update(id, swimmer))
+    return jsonify(swimDAO.update(id, updated_swimmer))
 
-#curl -X PUT http://127.0.0.1:5000/results/1 \
-#  -H "Content-Type: application/json" \
-#  -d '{
-#        "first_name": "Anna",
-#        "last_name": "Smith",
-#        "sex": "F",
-#        "age_group": 13,
-#        "event": "200m IM",
-#        "date": "2025-05-25",
-#        "time": "00:02:05"
-#      }'
-
-
+# curl -X PUT http://127.0.0.1:5000/results/1 -H "Content-Type: application/json" -d '{"first_name": "Sofia", "last_name": "PPPPPP", "sex": "F", "age_group": 13, "event": "200m IM", "date": "2025-05-25", "time": "00:02:05"}'
 
 
 
@@ -157,4 +135,4 @@ def delete_record(id):
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000, debug=True)
-    print("app running..")
+    

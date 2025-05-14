@@ -42,8 +42,7 @@ class SwimmersDAO:
             return swimmers_list
         finally:
             self.closeAll()
-        self.closeAll()
-        return swimmers_list
+            return swimmers_list
     
     
     # find by id

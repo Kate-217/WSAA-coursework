@@ -8,7 +8,8 @@ def get_connection():
         host = db_config["host"],
         user = db_config["user"],
         password = db_config["password"],
-        database = db_config["database"])
+        database = db_config["database"]),
+        autocommit=True
         return connection
         
     except mysql.connector.Error as e:
