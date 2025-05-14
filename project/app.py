@@ -23,6 +23,9 @@ def home():
 def get_swimmers():
     return jsonify(swimDAO.get_all())
 
+# curl http://127.0.0.1:5000/results
+
+
 # create a new result
 @app.route("/results", methods=['POST'])
 def create_result():
@@ -37,6 +40,18 @@ def create_result():
 
     return jsonify(swimDAO.create(swimmer))
 
+# curl -X POST http://127.0.0.1:5000/results \
+ #-H "Content-Type: application/json" \
+ #-d '{
+ #      "first_name": "Anna",
+ #      "last_name": "Smith",
+ #      "sex": "F",
+ #      "age_group": 12,
+ #      "event": "100m Butterfly",
+ #      "date": "2025-05-20",
+ #      "time": "00:01:25"
+ #  }'
+#
 
 # find by ID 
 @app.route("/results/<int:id>", methods=['GET'])
@@ -46,6 +61,9 @@ def find_swimmer(id):
         return jsonify(swimmer)
     else:
         return jsonify({"message": "Swimmer is not found"})
+
+# curl http://127.0.0.1:5000/results/1
+
 
 
 # find by age
@@ -61,6 +79,8 @@ def find_by_age(age_group):
 
 # curl http://127.0.0.1:5000/results/age/12
     
+    
+    
 # only girls
 @app.route("/results/girls", methods=['GET'])
 def get_girls():
@@ -73,6 +93,8 @@ def get_girls():
 # curl http://127.0.0.1:5000/results/girls
 
 
+
+
 # only boys
 @app.route("/results/boys", methods=['GET'])
 def get_boys():
@@ -83,6 +105,8 @@ def get_boys():
         return jsonify({"message": "No  swimmers found"})
 
 # curl http://127.0.0.1:5000/results/boys
+
+
 
 # update
 @app.route("/results/<int:id>", methods=['PUT'])
@@ -100,6 +124,22 @@ def update_result(id):
             swimmer[i] = jsonstring[i]
 
     return jsonify(swimDAO.update(id, swimmer))
+
+#curl -X PUT http://127.0.0.1:5000/results/1 \
+#  -H "Content-Type: application/json" \
+#  -d '{
+#        "first_name": "Anna",
+#        "last_name": "Smith",
+#        "sex": "F",
+#        "age_group": 13,
+#        "event": "200m IM",
+#        "date": "2025-05-25",
+#        "time": "00:02:05"
+#      }'
+
+
+
+
 
 # delete
 @app.route("/results/<int:id>", methods=['DELETE'])
