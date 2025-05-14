@@ -174,3 +174,7 @@ config.py
 config1.py
 db_config.py
 
+__pycache__/
+*.pyc
+
+
