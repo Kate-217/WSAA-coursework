@@ -163,19 +163,12 @@ class SwimmersDAO:
         keys = ["id", "first_name", "last_name", "sex", "age_group", "event", "date", "time"]
         dictionary = dict(zip(keys,resultline))
         
-        # Fix a problem with AI
-        # TIME_FORMAT with escaped %% did not work — caused SQL parameter mismatch.
-        # Converts MySQL TIME (timedelta) to "HH:MM:SS" string for JSON response.
-      #  if hasattr(dictionary["time"], 'seconds'):
-       #     total_seconds = int(dictionary["time"].total_seconds())
-        #    hours = total_seconds // 3600
-         #   minutes = (total_seconds % 3600) // 60
-          #  seconds = total_seconds % 60
-           # dictionary["time"] = f"{hours:02}:{minutes:02}:{seconds:02}"
-        #else:
-        #    dictionary["time"] = str(dictionary["time"])
+   
 
         return dictionary
             
         
-swimDAO = SwimmersDAO()    
+swimDAO = SwimmersDAO() 
+
+if __name__ == "__main__":
+    print("Running....")   

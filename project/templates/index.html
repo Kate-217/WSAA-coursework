@@ -68,7 +68,7 @@
                 <option value="F">Female</option>
                 <option value="M">Male</option>
             </select> 
-        Age Group: <input type="number" name="age_group"><br/>
+        Age Group: <input type="number" name="age_group" min="9" max="13"><br/> <!--https://stackoverflow.com/questions/8354975/how-can-i-set-max-length-in-an-html5-input-type-number-element-->
         <br/>
         Event: <select name="event">
             <option value="50 Freestyle">50 Freestyle</option>
@@ -90,7 +90,8 @@
     </div>
 
     <script>
-        // Validate time format (MM:SS:ss)
+        // Validate time format (MM:SS:ss); 
+        // Ref.: prompt to chatGPT "How to validate time in format "MM:SS:ss" using JavaScript?"
         function isValidTimeFormat(timeStr) {
             return /^\d{2}:\d{2}:\d{2}$/.test(timeStr);
         }
@@ -153,8 +154,15 @@
                 method: "GET",
                 dataType: "json",
                 success: function (data) {
+                    document.getElementById("swimmerBody").innerHTML = ""; // refresh the table's body
                     for (let swimmer of data) {
                         addSwimmerToTable(swimmer);
+                    }
+                    document.getElementById("ageFilterSelect").value = ""; // to clear the filter
+                    
+                    const radios = document.getElementsByName("sexFilter"); // https://stackoverflow.com/questions/2554116/how-to-clear-radio-button-in-javascript
+                    for (let i = 0; i < radios.length; i++) {
+                        radios[i].checked = false;
                     }
                 },
                 error: function (xhr, status, error) {
@@ -295,7 +303,7 @@
         method: "GET",
         dataType: "json",
         success: function (data) {
-            document.getElementById("swimmerBody").innerHTML = "";
+            document.getElementById("swimmerBody").innerHTML = ""; 
             for (let swimmer of data) {
                 addSwimmerToTable(swimmer);
             }
