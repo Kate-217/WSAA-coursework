@@ -1,5 +1,5 @@
 
-1. clone this repository locally 
+1. clone the current repository locally (`git clone git@github.com:Kate-217/WSAA-coursework.git`)
 2. rename db_config.py_template to db_config.py
 3. change host, user, password in db_config.py to let the app connect to your local MySQL database server
 4. pip install -r requirements.txt 
