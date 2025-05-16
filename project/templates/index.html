@@ -348,7 +348,8 @@ function filterBySex(type) {
         }
     });
 }
-// the problem with data in wrong format solved with AI tool
+// Converts 'YYYY-MM-DD' to 'DD.MM.YYYY' format for display.
+// ChatGPT prompt: "How to format date 'YYYY-MM-DD' to 'DD.MM.YYYY' in JavaScript?"
 function formatDate(dateString) {
     const dateObj = new Date(dateString);
     const day = String(dateObj.getDate()).padStart(2, '0');

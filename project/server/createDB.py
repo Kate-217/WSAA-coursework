@@ -1,9 +1,10 @@
 import mysql.connector
+from db_config import db_config
 
 connection = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="rootroot" 
+    host = db_config["host"],
+    user = db_config["user"],
+    password = db_config["password"]
 )
 
 mycursor = connection.cursor()
@@ -20,9 +21,9 @@ connection.close()
 
 # reconnection to swimmers 
 connection = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="rootroot",
+    host = db_config["host"],
+    user = db_config["user"],
+    password = db_config["password"],        
     database="swimmers"
 )
 
