@@ -61,7 +61,7 @@ Visit the deployed version at:
 7. **Open in your browser**
    Go to:
    [http://localhost:5000](http://localhost:5000)
-   ➕ You can now add, update, or delete swimmers via the web interface.
+   You can now add, update, or delete swimmers via the web interface.
 
 ---
 
@@ -118,6 +118,23 @@ curl -X PUT http://127.0.0.1:5000/results/1 \
 ```bash
 curl -X DELETE http://127.0.0.1:5000/results/1
 ```
+## References
 
----
+1. Course materials created by Andrew Beatty
+   [https://github.com/andrewbeattycourseware/wsaa-courseware](https://github.com/andrewbeattycourseware/wsaa-courseware)
+
+2. MySQL 8.4 Documentation – DROP DATABASE
+   [https://dev.mysql.com/doc/refman/8.4/en/drop-database.html](https://dev.mysql.com/doc/refman/8.4/en/drop-database.html)
+
+3. Stack Overflow – Make a dictionary from separate lists of keys and values
+   [https://stackoverflow.com/questions/209840/make-a-dictionary-dict-from-separate-lists-of-keys-and-values](https://stackoverflow.com/questions/209840/make-a-dictionary-dict-from-separate-lists-of-keys-and-values)
+
+4. Stack Overflow – How can I set max length in an HTML5 input type="number" element?
+   [https://stackoverflow.com/questions/8354975/how-can-i-set-max-length-in-an-html5-input-type-number-element](https://stackoverflow.com/questions/8354975/how-can-i-set-max-length-in-an-html5-input-type-number-element)
+
+5. Stack Overflow – How to clear radio button in JavaScript
+   [https://stackoverflow.com/questions/2554116/how-to-clear-radio-button-in-javascript](https://stackoverflow.com/questions/2554116/how-to-clear-radio-button-in-javascript)
+
+
+
 
