@@ -120,8 +120,15 @@ curl -X DELETE http://127.0.0.1:5000/results/1
 ```
 ## References
 
-1. Course materials created by Andrew Beatty
+1. Course materials and lectures created by Andrew Beatty
    [https://github.com/andrewbeattycourseware/wsaa-courseware](https://github.com/andrewbeattycourseware/wsaa-courseware)
+
+3. W3school HTML tutorial
+    [https://www.w3schools.com/html/](https://www.w3schools.com/html/)   
+
+4. HTML Tables
+    [https://www.geeksforgeeks.org/html-tables/](https://www.geeksforgeeks.org/html-tables/)
+
 
 2. MySQL 8.4 Documentation – DROP DATABASE
    [https://dev.mysql.com/doc/refman/8.4/en/drop-database.html](https://dev.mysql.com/doc/refman/8.4/en/drop-database.html)
