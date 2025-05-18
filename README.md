@@ -18,7 +18,7 @@ In addition to the main project, the repository also includes **assessments** an
 
 ## About the Project 
 
-The core coursework project is located in the project folder.
+The core coursework project is located in the project [https://github.com/Kate-217/WSAA-coursework/tree/main/project](https://github.com/Kate-217/WSAA-coursework/tree/main/project) folder.
 It demonstrates basic CRUD functionality using a Flask-based web application.
 
 **Key components include:**
