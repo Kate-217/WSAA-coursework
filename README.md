@@ -1,9 +1,10 @@
 # Web Services and Applications module coursework
 
 This repository contains coursework developed for the Web Services and Applications module.
-The module focuses on key web technologies that retrieve, process, and expose data through APIs.
+The module focuses on key web technologies that retrieve, process, and expose data through APIs. 
 It covers working with data formats such as JSON, XML, and CSV, interacting with external services over HTTP, and developing RESTful APIs using Flask. 
 The client side includes dynamic interactions via AJAX and jQuery.
+In addition to the main project, the repository also includes **assessments** and **lab exercises** completed during the course.
 
 ### Key Topics Covered
 
