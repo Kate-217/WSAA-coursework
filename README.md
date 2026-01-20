@@ -1,39 +1,168 @@
-# Web Services and Applications module coursework
 
-This repository contains coursework developed for the Web Services and Applications module.
-The module focuses on key web technologies that retrieve, process, and expose data through APIs. 
-It covers working with data formats such as JSON, XML, and CSV, interacting with external services over HTTP, and developing RESTful APIs using Flask. 
-The client side includes dynamic interactions via AJAX and jQuery.
-In addition to the main project, the repository also includes **assessments** and **lab exercises** completed during the course.
+# RESTful API for Swimmers’ Gala Performance Records
 
-### Key Topics Covered
+This repository contains coursework for the **Web Services and Applications (WSAA)** module.  
+The core project is a **Flask-based RESTful web application and API** for managing swimmers’ competition results, including full CRUD functionality and database integration.
 
-- Data formats: CSV, JSON, XML
-- HTTP methods and RESTful APIs
-- Using `curl` and Postman to test APIs
-- Accessing public data APIs (e.g., CSO, train times, weather)
-- jQuery and AJAX for client-side interaction
-- Building a RESTful API using Python Flask
-- Hosting your API or app online
+---
 
-## About the Project 
+## What This Repository Is For
 
-The core coursework project is located in the [project](https://github.com/Kate-217/WSAA-coursework/tree/main/project) folder.
-It demonstrates basic CRUD functionality using a Flask-based web application.
+This repository demonstrates:
+- RESTful web services using Python and Flask
+- CRUD operations via HTTP methods
+- Backend–database interaction using MySQL
+- Separation of concerns (application logic, database configuration, templates)
+- Practical coursework for the WSAA module
 
-**Key components include:**
+The repository includes labs, assignments, and a fully implemented core project.
 
-A MySQL database for storing swimmers’ competition results
+---
 
-A Python Flask backend providing a RESTful API for create, read, update, and delete operations
+## Core Project Overview
 
-A front-end interface built with HTML and JavaScript for managing swimmer records
+The main project, located in the `project/` directory, implements a **RESTful API and web application** for managing swimmers’ gala performance records.
 
-Filtering functionality to display swimmers by age group and sex
+Users can:
+- Add, edit, delete swimmer results
+- Filter swimmers by age group and sex
+- Access data via a web interface or REST API endpoints
 
-### Deployed App
-View the live version here: [https://katespb.pythonanywhere.com/](https://katespb.pythonanywhere.com/)
+The project uses **Flask** for the backend and **MySQL** for persistent storage.
 
 
+---
 
+## Key Features
+
+- Flask-based RESTful API
+- CRUD operations (Create, Read, Update, Delete)
+- MySQL database integration
+- JSON-based API communication
+- HTML templates for a simple user interface
+- Modular and well-organised project structure
+
+---
+
+## Required Technologies
+
+- **Python 3.x**
+- **Flask**
+- **MySQL**
+- **pip**
+- HTML / JavaScript (for templates)
+
+---
+
+## How to Run the Project (Local Setup)
+
+### 1) Clone the repository
+
+```bash
+git clone https://github.com/Kate-217/WSAA-coursework.git
+cd WSAA-coursework/project
+````
+
+---
+
+### 2) Create and activate a virtual environment (recommended)
+
+```bash
+python -m venv venv
+source venv/bin/activate      # macOS / Linux
+# venv\Scripts\activate       # Windows
+```
+
+---
+
+### 3) Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 4) Configure the database
+
+Copy the configuration template:
+
+```bash
+cp db_config.py_template db_config.py
+```
+
+Edit `db_config.py` and add your local MySQL credentials.
+
+---
+
+### 5) Create and initialise the database
+
+```bash
+python create_db.py
+```
+
+> Note: You must have permissions to create and drop databases.
+
+---
+
+### 6) Run the Flask application
+
+```bash
+python app.py
+```
+
+The server will run at:
+
+```text
+http://127.0.0.1:5000/
+```
+
+---
+
+## User Manual / Usage
+
+### REST API
+
+The API supports standard CRUD operations on swimmer records.
+
+HTTP methods used:
+
+* **GET** – retrieve swimmer data
+* **POST** – add new swimmer results
+* **PUT** – update existing records
+* **DELETE** – remove records
+
+Requests and responses are JSON-formatted.
+Example API requests are documented in the project-level README.
+
+---
+
+### Web Interface
+
+If templates are enabled:
+
+1. Start the Flask server.
+2. Open `http://127.0.0.1:5000/` in a browser.
+3. Manage swimmer results through the user interface.
+
+---
+
+## Notes and Limitations
+
+* This project is intended for **educational purposes**.
+* Authentication and authorisation are not implemented.
+* Error handling and validation are kept minimal unless required by coursework.
+
+---
+
+## Acknowledgements
+
+This project was developed using materials and lectures provided as part of the
+**Web Services and Applications** module at **Atlantic Technological University (ATU)**.
+
+---
+
+## Author
+
+Katerina Lisovenko
 
