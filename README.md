@@ -147,18 +147,13 @@ If templates are enabled:
 
 ---
 
-## Notes and Limitations
+## Notes
 
 * This project is intended for **educational purposes**.
 * Authentication and authorisation are not implemented.
 * Error handling and validation are kept minimal unless required by coursework.
-
----
-
-## Acknowledgements
-
-This project was developed using materials and lectures provided as part of the
-**Web Services and Applications** module at **Atlantic Technological University (ATU)**.
+* This project was developed using materials and lectures provided as part of the
+  **Web Services and Applications** module at **Atlantic Technological University (ATU)**.
 
 ---
 
